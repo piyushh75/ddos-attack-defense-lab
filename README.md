@@ -298,6 +298,17 @@ ddos-attack-defense-lab/
 └── README.md
 ```
 
+## 📄 Research Documentation
+
+For a comprehensive analysis of this implementation, see the [complete research paper](research/ddos-attack-defense-research.pdf).
+
+**Key Findings:**
+- 52.6% service degradation under SYN flood attack
+- 99.7% malicious packet blocking with iptables defense
+- Validated MITRE ATT&CK T1499.002 technique
+- Aligned with Essential 8 framework
+```
+
 ## 🔮 Future Enhancements
 
 - [ ] Multi-vector attack simulation (UDP flood, HTTP flood, Slowloris)
