@@ -4,8 +4,6 @@ A comprehensive cybersecurity testing framework demonstrating TCP SYN flood atta
 
 🔒 **Educational Tool** | ⚠️ **Authorized Use Only** | 🎓 **Cybersecurity Research**
 
-![DDoS Lab Architecture](docs/images/architecture.png)
-
 ## 🎯 Project Overview
 
 This project demonstrates real-world denial-of-service attack vectors and defense strategies through controlled testing in isolated virtual environments. The implementation validates **MITRE ATT&CK technique T1499.002 (Service Exhaustion)** and evaluates firewall-based mitigation effectiveness against network-layer attacks.
@@ -17,12 +15,15 @@ This project demonstrates real-world denial-of-service attack vectors and defens
 ### Test Results Preview
 
 **Baseline Performance:**
+
 ![Baseline Results](docs/images/baseline-results.png)
 
 **Attack Impact:**
+
 ![Attack Impact](docs/images/attack-impact.png)
 
 **Defense Effectiveness:**
+
 ![Defense Results](docs/images/defense-results.png)
 
 ### Key Results
