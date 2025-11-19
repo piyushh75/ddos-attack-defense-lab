@@ -36,6 +36,18 @@
 │  ✓ Complete Network Isolation                                  │
 └────────────────────────────────────────────────────────────────┘
 ```
+### Physical Topology
+
+![Physical Network Topology](images/architecture.png)
+
+### Network Configuration
+
+![Network Configuration Details](images/network-config.png)
+
+### System Resources
+
+![System Resource Monitoring](images/system-resources.png)
+```
 
 ### Logical Network Diagram
 ```
@@ -645,6 +657,14 @@ Validation Testing
 │   └── network-config.md
 │
 ├── docs/                [Reference only]
+│   ├── images/                        
+│   │   ├── architecture.png           
+│   │   ├── baseline-results.png       
+│   │   ├── attack-impact.png          
+│   │   ├── defense-results.png        
+│   │   ├── iptables-rules.png         
+│   │   ├── network-config.png         
+│   │   └── system-resources.png       
 │   ├── environment-setup.md
 │   ├── test-results.md
 │   ├── mitre-attack-mapping.md
