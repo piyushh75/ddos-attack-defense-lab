@@ -26,6 +26,10 @@ All tests conducted using Apache Bench (ab) with the following parameters:
 | **Failed Requests** | 0 |
 | **Success Rate** | 100% |
 
+### Performance Metrics
+
+![Baseline Performance Results](images/baseline-results.png)
+
 ### Analysis
 
 The baseline test establishes optimal server performance under normal conditions. The high throughput (5,487 req/sec) and low latency (1.82ms) indicate:
@@ -36,6 +40,10 @@ The baseline test establishes optimal server performance under normal conditions
 ✓ Suitable for attack testing
 
 ## Attack Impact Test
+
+### Results
+
+![Attack Impact Results](images/attack-impact.png)
 
 ### Test Conditions
 - **Attack Type:** TCP SYN Flood
@@ -125,6 +133,14 @@ The iptables rules introduce significant performance overhead:
 - Service availability > optimal performance
 
 ## Defense Under Attack Test
+
+### Results
+
+![Defense Effectiveness Results](images/defense-results.png)
+
+### iptables Configuration
+
+![iptables Defense Rules](images/iptables-rules.png)
 
 ### Test Conditions
 - **Defense Active:** Yes (iptables rules applied)
