@@ -307,7 +307,6 @@ For a comprehensive analysis of this implementation, see the [complete research 
 - 99.7% malicious packet blocking with iptables defense
 - Validated MITRE ATT&CK T1499.002 technique
 - Aligned with Essential 8 framework
-```
 
 ## 🔮 Future Enhancements
 
