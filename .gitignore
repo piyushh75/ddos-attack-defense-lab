@@ -1,0 +1,382 @@
+# ============================================
+# DDoS Defense Lab - Git Ignore File
+# ============================================
+
+# ============================================
+# Operating System Files
+# ============================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.directory
+.Trash-*
+.nfs*
+
+# ============================================
+# IDE and Editor Files
+# ============================================
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+.history/
+
+# JetBrains IDEs (IntelliJ, PyCharm, etc.)
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+.idea_modules/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+Session.vim
+Temporary Items
+.netrwhist
+*~
+
+# Emacs
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Atom
+.atom/
+
+# ============================================
+# Virtual Machine Files
+# ============================================
+
+# VMware
+*.vmdk
+*.vmx
+*.vmxf
+*.nvram
+*.vmsd
+*.vmem
+*.vmss
+*.vmsn
+*.vmtm
+*.log
+*.lck/
+.vmware/
+
+# VirtualBox
+*.vdi
+*.vbox
+*.vbox-prev
+
+# Vagrant
+.vagrant/
+
+# ============================================
+# Test Results and Logs
+# ============================================
+
+# Test output files
+results/*.txt
+results/*.log
+results/*.csv
+results/*.json
+
+# BUT keep the .gitkeep file
+!results/.gitkeep
+
+# Apache logs (if accidentally copied)
+*.access.log
+*.error.log
+access.log*
+error.log*
+
+# System logs
+*.syslog
+syslog*
+
+# ============================================
+# Temporary and Cache Files
+# ============================================
+
+# General temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+*.orig
+*.cache
+*.swp
+*.swo
+
+# Backup files
+*~
+*.bak
+*.backup
+*.old
+*.orig
+*-old
+*-backup
+
+# ============================================
+# Python
+# ============================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# PyCharm
+.idea/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# ============================================
+# Node.js (if used for any tooling)
+# ============================================
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ============================================
+# Sensitive Data and Credentials
+# ============================================
+
+# SSH keys and certificates
+*.key
+*.pem
+*.crt
+*.cer
+*.p12
+*.pfx
+id_rsa
+id_rsa.pub
+known_hosts
+
+# Configuration files with secrets
+secrets.yml
+secrets.yaml
+secrets.json
+.env
+.env.local
+.env.*.local
+config/secrets.*
+
+# Database files (if any)
+*.db
+*.sqlite
+*.sqlite3
+
+# ============================================
+# Compressed Archives
+# ============================================
+
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+*.bz2
+*.gz
+*.xz
+
+# ============================================
+# Images (Exclude - We WANT images)
+# ============================================
+
+# IMPORTANT: Allow all images in docs/images/
+!docs/images/*.png
+!docs/images/*.jpg
+!docs/images/*.jpeg
+!docs/images/*.gif
+!docs/images/*.svg
+
+# ============================================
+# Packet Captures and Network Data
+# ============================================
+
+*.pcap
+*.pcapng
+*.cap
+capture*.txt
+
+# ============================================
+# Build Artifacts
+# ============================================
+
+# Compiled binaries
+*.exe
+*.out
+*.app
+*.o
+*.obj
+*.class
+
+# ============================================
+# Project Specific
+# ============================================
+
+# Local test configurations
+local-config.sh
+test-config.local
+
+# Personal notes
+NOTES.md
+TODO.md
+personal-notes.txt
+
+# Experimental scripts
+experiment-*.sh
+test-*.sh
+debug-*.sh
+
+# ============================================
+# Documentation Build Files
+# ============================================
+
+# Sphinx documentation
+docs/_build/
+docs/_static/
+docs/_templates/
+
+# MkDocs
+site/
+
+# ============================================
+# Package Manager Files
+# ============================================
+
+# apt lists
+*.list
+
+# rpm
+*.rpm
+
+# deb
+*.deb
+
+# ============================================
+# Core Dumps
+# ============================================
+
+core
+core.*
+*.core
+*.dump
+
+# ============================================
+# Performance and Profiling Data
+# ============================================
+
+*.prof
+*.profile
+*.out
+
+# ============================================
+# Custom Excludes
+# ============================================
+
+# Any files ending in -local
+*-local.*
+
+# Any files in a 'scratch' directory
+scratch/
+temp/
+tmp/
+
+# ============================================
+# ALLOW THESE FILES (Override previous rules)
+# ============================================
+
+# Explicitly allow these important files
+!README.md
+!LICENSE
+!.gitignore
+!*.sh
+!*.md
+!*.txt
+!docs/**/*.md
+!docs/images/*
+
+# ============================================
+# End of .gitignore
+# ============================================
