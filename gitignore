@@ -1,0 +1,45 @@
+# OS Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Virtual Machine Files
+*.vmdk
+*.vmx
+*.vmxf
+*.nvram
+*.vmsd
+*.log
+
+# Test Results
+results/*.txt
+results/*.log
+results/*.csv
+!results/.gitkeep
+
+# Temporary Files
+*.tmp
+*.bak
+*.cache
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+
+# Sensitive Data
+*.key
+*.pem
+*.crt
+config/secrets.yml
