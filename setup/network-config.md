@@ -172,4 +172,3 @@ Before starting attacks:
 - [ ] Network isolated from production systems
 - [ ] Written authorization obtained
 - [ ] Testing scope documented
-````
