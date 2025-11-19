@@ -347,4 +347,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Technical documentation
 
 **Last Updated:** 20 November 2024
-```
