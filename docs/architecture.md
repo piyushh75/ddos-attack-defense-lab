@@ -3,6 +3,10 @@
 ## Network Architecture
 
 ### Physical Topology
+
+![Physical Network Topology](images/architecture.png)
+
+*Network diagram showing isolated VMware environment with Kali attacker and Ubuntu target*
 ```
 ┌────────────────────────────────────────────────────────────────┐
 │                        Host Machine                             │
@@ -36,18 +40,6 @@
 │  ✓ Complete Network Isolation                                  │
 └────────────────────────────────────────────────────────────────┘
 ```
-### Physical Topology
-
-![Physical Network Topology](images/architecture.png)
-
-### Network Configuration
-
-![Network Configuration Details](images/network-config.png)
-
-### System Resources
-
-![System Resource Monitoring](images/system-resources.png)
-```
 
 ### Logical Network Diagram
 ```
@@ -65,18 +57,26 @@
     │                                      │
     │                                      │
     └──Performance Testing (Apache Bench)──┘
-Network Isolation Design
-Purpose: Prevent accidental attacks on external systems
-Implementation:
+```
 
-VMware host-only network (VMnet1)
-No default gateway configured
-No NAT or bridged adapters
-No DNS servers configured
-No routes to external networks
+### Network Configuration Details
 
-Verification:
-bash# Should timeout (no internet)
+![Network Configuration](images/network-config.png)
+
+**Network Isolation Design:**
+
+**Purpose:** Prevent accidental attacks on external systems
+
+**Implementation:**
+- VMware host-only network (VMnet1)
+- No default gateway configured
+- No NAT or bridged adapters
+- No DNS servers configured
+- No routes to external networks
+
+**Verification:**
+```bash
+# Should timeout (no internet)
 ping 8.8.8.8
 ping google.com
 
@@ -84,6 +84,8 @@ ping google.com
 ping 192.168.153.129  # From Kali
 ping 192.168.153.128  # From Ubuntu
 ```
+
+---
 
 ## System Architecture
 
@@ -163,6 +165,8 @@ ping 192.168.153.128  # From Ubuntu
 │                                                    │
 └────────────────────────────────────────────────────┘
 ```
+
+---
 
 ## Data Flow Architecture
 
@@ -268,6 +272,8 @@ Attack Impact: 2,600 req/sec (-52.6%), service degraded
 Defense Result: 312 req/sec maintained, service available
 ```
 
+---
+
 ## iptables Rule Processing Flow
 ```
 Incoming Packet (SYN to port 80)
@@ -337,6 +343,8 @@ Statistics:
 - Blocking rate: 99.7%
 ```
 
+---
+
 ## Component Specifications
 
 ### Hardware Resources
@@ -385,6 +393,8 @@ Reserved:
 - .130-.254: Available for expansion
 ```
 
+---
+
 ## Performance Characteristics
 
 ### System Capacity
@@ -418,6 +428,8 @@ Service Availability: 100%
 
 ### Resource Utilization
 
+![System Resources Under Load](images/system-resources.png)
+
 **CPU Usage:**
 - Baseline: <10%
 - During attack: 30-40%
@@ -432,6 +444,8 @@ Service Availability: 100%
 - Baseline: Minimal (<1 Mbps)
 - During attack: 10-20 Mbps
 - With defense: 5-10 Mbps
+
+---
 
 ## Scalability Considerations
 
@@ -455,15 +469,21 @@ Service Availability: 100%
           │            │            │
      ┌────▼───┐   ┌───▼────┐   ┌──▼─────┐
      │Apache 1│   │Apache 2│   │Apache 3│
-     │+ iptables  │+ iptables  │+ iptables
+     │+iptables│   │+iptables│   │+iptables│
      └────────┘   └────────┘   └────────┘
 
 Additional Layers:
 - Cloud-based DDoS mitigation (CloudFlare/AWS Shield)
 - CDN for content distribution
 - Anycast routing for geographic distribution
-Security Architecture
-Defense in Depth Layers
+```
+
+---
+
+## Security Architecture
+
+### Defense in Depth Layers
+```
 Layer 1: Network Perimeter
          ├─ Physical isolation (VMnet1)
          └─ No internet connectivity
@@ -483,44 +503,55 @@ Layer 4: Monitoring & Logging
          ├─ Apache access logs
          └─ System resource monitoring
 
-Layer 5: Incident ResponseRetryPAContinue├─ Automated defense scripts
-├─ Manual escalation procedures
-└─ Recovery playbooks
+Layer 5: Incident Response
+         ├─ Automated defense scripts
+         ├─ Manual escalation procedures
+         └─ Recovery playbooks
+```
 
 ### Attack Surface Analysis
 
 **Exposed Services:**
+```
 Port 80 (HTTP):
-Risk: HIGH - Primary attack target
-Mitigation: iptables rate limiting
-Monitoring: Apache logs, iptables stats
+  Risk: HIGH - Primary attack target
+  Mitigation: iptables rate limiting
+  Monitoring: Apache logs, iptables stats
+
 Port 22 (SSH):
-Risk: MEDIUM - Administrative access
-Mitigation: Key-based auth only (recommended)
-Monitoring: Auth logs
+  Risk: MEDIUM - Administrative access
+  Mitigation: Key-based auth only (recommended)
+  Monitoring: Auth logs
+
 Other Ports:
-Risk: MINIMAL - Not exposed in this lab
-Status: Filtered/Closed
+  Risk: MINIMAL - Not exposed in this lab
+  Status: Filtered/Closed
+```
 
 **Threat Vectors:**
+```
+1. Network Layer (OSI Layer 3-4)
+   └─ TCP SYN Flood ✓ (Tested)
+   └─ UDP Flood (Not tested)
+   └─ ICMP Flood (Not tested)
 
-Network Layer (OSI Layer 3-4)
-└─ TCP SYN Flood ✓ (Tested)
-└─ UDP Flood (Not tested)
-└─ ICMP Flood (Not tested)
-Application Layer (OSI Layer 7)
-└─ HTTP Flood (Not tested)
-└─ Slowloris (Not tested)
-└─ SSL/TLS exhaustion (Not tested)
-Protocol Exploitation
-└─ TCP state exhaustion ✓ (Tested)
-└─ Connection hijacking (Out of scope)
-└─ Amplification attacks (Not tested)
+2. Application Layer (OSI Layer 7)
+   └─ HTTP Flood (Not tested)
+   └─ Slowloris (Not tested)
+   └─ SSL/TLS exhaustion (Not tested)
 
+3. Protocol Exploitation
+   └─ TCP state exhaustion ✓ (Tested)
+   └─ Connection hijacking (Out of scope)
+   └─ Amplification attacks (Not tested)
+```
+
+---
 
 ## Monitoring Architecture
 
 ### Real-Time Monitoring Components
+```
 ┌─────────────────────────────────────────────────┐
 │            Monitoring Dashboard                  │
 │                                                 │
@@ -545,96 +576,107 @@ Protocol Exploitation
 │  └──────────────┘  └──────────────┘            │
 │                                                 │
 └─────────────────────────────────────────────────┘
-│                    │
-▼                    ▼
-[Log Files]          [Alerts]
+         │                    │
+         ▼                    ▼
+    [Log Files]          [Alerts]
+```
 
 ### Monitoring Data Flow
+```
 Data Sources → Collection → Storage → Analysis → Alerting
+
 Sources:
 ├─ /proc/net/netstat (kernel stats)
 ├─ netstat -ant (connection states)
 ├─ iptables -L -n -v (firewall stats)
 ├─ /var/log/apache2/* (web logs)
 └─ top/htop (system resources)
+
 Collection:
 ├─ monitoring.sh script (bash)
 ├─ Apache Bench tests (ab)
 └─ Manual observation (CLI)
+
 Storage:
-├─ results/.txt (test output)
+├─ results/*.txt (test output)
 ├─ /var/log/syslog (system logs)
-└─ /var/log/apache2/ (web logs)
+└─ /var/log/apache2/* (web logs)
+
 Analysis:
 ├─ grep/awk/sed parsing
 ├─ Performance comparisons
 └─ Statistical analysis
+
 Alerting:
 ├─ Console output (real-time)
 ├─ Log entries (persistent)
 └─ Manual escalation (as needed)
+```
+
+---
 
 ## Deployment Architecture
 
 ### VM Deployment Workflow
-
-Infrastructure Setup
-┌────────────────────┐
-│ Install VMware     │
-│ Configure VMnet1   │
-│ Download ISOs      │
-└─────────┬──────────┘
-│
-▼
-VM Creation
-┌────────────────────┐
-│ Create Ubuntu VM   │
-│ Create Kali VM     │
-│ Configure resources│
-└─────────┬──────────┘
-│
-▼
-OS Installation
-┌────────────────────┐
-│ Install Ubuntu     │
-│ Install Kali       │
-│ Basic config       │
-└─────────┬──────────┘
-│
-▼
-Network Configuration
-┌────────────────────┐
-│ Set static IPs     │
-│ Verify connectivity│
-│ Confirm isolation  │
-└─────────┬──────────┘
-│
-▼
-Software Installation
-┌────────────────────┐
-│ Apache on Ubuntu   │
-│ hping3 on Kali     │
-│ Testing tools      │
-└─────────┬──────────┘
-│
-▼
-Repository Deployment
-┌────────────────────┐
-│ Clone repo         │
-│ Set permissions    │
-│ Test scripts       │
-└─────────┬──────────┘
-│
-▼
-Validation Testing
-┌────────────────────┐
-│ Baseline test      │
-│ Attack test        │
-│ Defense test       │
-└────────────────────┘
-
+```
+1. Infrastructure Setup
+   ┌────────────────────┐
+   │ Install VMware     │
+   │ Configure VMnet1   │
+   │ Download ISOs      │
+   └─────────┬──────────┘
+             │
+             ▼
+2. VM Creation
+   ┌────────────────────┐
+   │ Create Ubuntu VM   │
+   │ Create Kali VM     │
+   │ Configure resources│
+   └─────────┬──────────┘
+             │
+             ▼
+3. OS Installation
+   ┌────────────────────┐
+   │ Install Ubuntu     │
+   │ Install Kali       │
+   │ Basic config       │
+   └─────────┬──────────┘
+             │
+             ▼
+4. Network Configuration
+   ┌────────────────────┐
+   │ Set static IPs     │
+   │ Verify connectivity│
+   │ Confirm isolation  │
+   └─────────┬──────────┘
+             │
+             ▼
+5. Software Installation
+   ┌────────────────────┐
+   │ Apache on Ubuntu   │
+   │ hping3 on Kali     │
+   │ Testing tools      │
+   └─────────┬──────────┘
+             │
+             ▼
+6. Repository Deployment
+   ┌────────────────────┐
+   │ Clone repo         │
+   │ Set permissions    │
+   │ Test scripts       │
+   └─────────┬──────────┘
+             │
+             ▼
+7. Validation Testing
+   ┌────────────────────┐
+   │ Baseline test      │
+   │ Attack test        │
+   │ Defense test       │
+   └────────────────────┘
+```
 
 ### Script Deployment Structure
+```
 ~/ddos-defense-lab/
 │
 ├── attack/              [Deploy on Kali]
@@ -644,10 +686,10 @@ Validation Testing
 ├── defense/             [Deploy on Ubuntu]
 │   ├── iptables-rules.sh
 │   ├── iptables-reset.sh
-│   └── defense-documentation.md
+│   └─ defense-documentation.md
 │
 ├── testing/             [Deploy on both]
-│   ├── baseline-test.sh
+│   ├─ baseline-test.sh
 │   ├── performance-testing.sh
 │   └── monitoring.sh
 │
@@ -657,29 +699,33 @@ Validation Testing
 │   └── network-config.md
 │
 ├── docs/                [Reference only]
-│   ├── images/                        
-│   │   ├── architecture.png           
-│   │   ├── baseline-results.png       
-│   │   ├── attack-impact.png          
-│   │   ├── defense-results.png        
-│   │   ├── iptables-rules.png         
-│   │   ├── network-config.png         
-│   │   └── system-resources.png       
+│   ├── images/
+│   │   ├── architecture.png
+│   │   ├── baseline-results.png
+│   │   ├── attack-impact.png
+│   │   ├── defense-results.png
+│   │   ├── iptables-rules.png
+│   │   ├── network-config.png
+│   │   └── system-resources.png
 │   ├── environment-setup.md
 │   ├── test-results.md
 │   ├── mitre-attack-mapping.md
 │   └── architecture.md
 │
 └── results/             [Generated during tests]
-├── baseline-performance.txt
-├── attack-impact.txt
-└── defense-effectiveness.txt
+    ├── baseline-performance.txt
+    ├── attack-impact.txt
+    └── defense-effectiveness.txt
+```
+
+---
 
 ## Disaster Recovery
 
 ### Snapshot Strategy
 
 **Recommended Snapshots:**
+```
 Ubuntu Target:
 ├─ Snapshot 1: "Clean Install"
 │  └─ After OS installation, before configuration
@@ -691,13 +737,15 @@ Ubuntu Target:
 │  └─ After successful baseline test
 │
 └─ Snapshot 4: "Defense Ready"
-└─ After iptables configuration
+   └─ After iptables configuration
+
 Kali Attacker:
 ├─ Snapshot 1: "Clean Install"
 │  └─ After OS installation
 │
 └─ Snapshot 2: "Tools Ready"
-└─ After all tools installed and tested
+   └─ After all tools installed and tested
+```
 
 ### Recovery Procedures
 
@@ -728,6 +776,8 @@ sudo tail -f /var/log/apache2/error.log
 
 # Or revert to snapshot
 ```
+
+---
 
 ## Performance Optimization
 
@@ -811,6 +861,8 @@ echo "net.ipv4.tcp_syncookies=1" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_syn_retries=1" >> /etc/sysctl.conf
 ```
 
+---
+
 ## Testing Methodology
 
 ### Test Scenarios
@@ -818,7 +870,7 @@ Test Matrix:
 ┌────────────────┬──────────┬─────────┬────────────┐
 │ Scenario       │ Attack   │ Defense │ Expected   │
 ├────────────────┼──────────┼─────────┼────────────┤
-│ Baseline       │ No       │ No      │ 5400 req/s │
+│ Baseline       │ No       │ No      │RetryPAContinue5400 req/s │
 │ Attack Only    │ Yes      │ No      │ 2600 req/s │
 │ Defense Only   │ No       │ Yes     │  550 req/s │
 │ Defense Active │ Yes      │ Yes     │  310 req/s │
@@ -852,6 +904,8 @@ Post-Test Analysis
 ├─ Document findings
 └─ Generate reports
 
+
+---
 
 ## Troubleshooting Architecture
 
@@ -904,30 +958,32 @@ tail -f /var/log/apache2/error.log
 dmesg | tail                   # Kernel messages
 ```
 
+---
+
 ## Security Considerations
 
 ### Operational Security
 
 **Before Testing:**
-- [ ] Ensure network isolation verified
-- [ ] Confirm no production systems accessible
-- [ ] Have written authorization
-- [ ] Document testing scope
-- [ ] Notify stakeholders
+- Ensure network isolation verified
+- Confirm no production systems accessible
+- Have written authorization
+- Document testing scope
+- Notify stakeholders
 
 **During Testing:**
-- [ ] Monitor for unintended impacts
-- [ ] Keep detailed logs
-- [ ] Stay within authorized scope
-- [ ] Be ready to stop immediately
-- [ ] Watch for stability issues
+- Monitor for unintended impacts
+- Keep detailed logs
+- Stay within authorized scope
+- Be ready to stop immediately
+- Watch for stability issues
 
 **After Testing:**
-- [ ] Reset to clean state
-- [ ] Secure all documentation
-- [ ] Review findings
-- [ ] Report responsibly
-- [ ] Archive test data
+- Reset to clean state
+- Secure all documentation
+- Review findings
+- Report responsibly
+- Archive test data
 
 ### Data Protection
 
@@ -942,6 +998,8 @@ How to protect:
 ├─ Secure credential storage
 ├─ Access control on repositories
 └─ Responsible disclosure practices
+
+---
 
 ## Future Architecture Enhancements
 
